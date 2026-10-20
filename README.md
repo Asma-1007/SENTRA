@@ -1,0 +1,1 @@
+SENTRA is a Jarvis-style AI-assistant that runs on your own laptop. It is designed with a small team of AI assistants that plan tasks, does them,  checks the results and remembers things. 
