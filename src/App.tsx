@@ -39,21 +39,95 @@ function App() {
     return copy[section];
   }, [section]);
 
-  const sendMessage = () => {
-    const clean = input.trim();
-    if (!clean) return;
-    setMessages((current) => [
-      ...current,
-      { role: "user", text: clean },
-      { role: "assistant", text: "This is a frontend demo, so no local AI model is connected yet. Your interface is ready for a backend integration when your team is." },
-    ]);
-    setInput("");
-  };
+  const getDemoReply = (prompt: string): string => {
+  const text = prompt.toLowerCase();
 
-  const notify = (message: string) => {
+  if (text.includes("plan my day") || text.includes("productivity")) {
+    return `Let's make today manageable.
+
+1. Pick your three most important tasks.
+2. Start with the most urgent one.
+3. Focus for 25 minutes, then take a 5-minute break.
+4. Review your progress before wrapping up.
+
+My suggestion: start small and build momentum.`;
+  }
+
+  if (text.includes("summar") || text.includes("notes")) {
+    return `Absolutely! Send me your notes, and I'll organise them into:
+
+* Key points
+* Important details
+* Action items
+* A concise summary
+
+I'll keep the main ideas clear and easy to revise.`;
+  }
+
+  if (
+    text.includes("explain") ||
+    text.includes("what is") ||
+    text.includes("how does")
+  ) {
+    return `Let's break that down simply.
+
+First, identify the main idea. Then look at how its parts connect, and use an example to make it easier to understand.
+
+Tell me the specific concept you're exploring, and I'll walk you through it step by step.`;
+  }
+
+  if (
+    text.includes("hello") ||
+    text.includes("hey") ||
+    text.includes("hi")
+  ) {
+    return `Hey! I'm SENTRA. ✨
+
+I'm ready to help you think through ideas, organise tasks, explain concepts, or plan your next steps.
+
+What shall we work on?`;
+  }
+
+  if (
+    text.includes("write") ||
+    text.includes("email") ||
+    text.includes("draft")
+  ) {
+    return `Of course. I can help you put that together.
+
+I'll aim for clear wording, a natural tone, and a structure that gets your point across.
+
+Tell me the purpose and tone you want, and we'll shape the draft.`;
+  }
+
+  return `Let's work through that together.
+
+Here's how I'd approach it:
+
+1. Identify the main goal.
+2. Break it into smaller, manageable steps.
+3. Compare the options and choose a practical next step.
+
+To get started, I'll focus on the most important part of your request: "${prompt}".`;
+};
+
+const sendMessage = () => {
+  const clean = input.trim();
+  if (!clean) return;
+
+  setMessages((current) => [
+    ...current,
+    { role: "user", text: clean },
+    { role: "assistant", text: getDemoReply(clean) },
+  ]);
+
+  setInput("");
+};
+
+  function notify(message: string) {
     setToast(message);
     window.setTimeout(() => setToast(""), 2400);
-  };
+  }
 
   return (
     <div className="app-shell">
