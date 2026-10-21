@@ -190,7 +190,9 @@ const sendMessage = () => {
           {section === "Agents" && <Agents />}
           {section === "Memory" && <Memory notify={notify} />}
           {section === "Settings" && <Settings online={online} setOnline={setOnline} privateMode={privateMode} setPrivateMode={setPrivateMode} voiceEnabled={voiceEnabled} setVoiceEnabled={setVoiceEnabled} />}
-          <footer className="footer"><span>SENTRA <b>PREVIEW 0.1</b></span><span><i /> FRONTEND DEMO · NO BACKEND CONNECTED</span></footer>
+          <footer className="footer">
+  <span>SENTRA <b>PREVIEW 0.1</b></span>
+</footer>
         </div>
       </main>
       {toast && <div className="toast"><span className="toast-check">✓</span>{toast}</div>}
